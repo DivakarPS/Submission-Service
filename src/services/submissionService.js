@@ -8,6 +8,7 @@ class SubmissionService{
     async addSubmission(submissionPayload){
 
         const problemId = submissionPayload.problemId;
+        const userId = submissionPayload.userId;
         const problemAdminApiResponse = await fetchProlemDetails(problemId);
 
         console.log(problemAdminApiResponse);
@@ -32,7 +33,9 @@ class SubmissionService{
                 code: submission.code,
                 language: submission.language,
                 inputTestCase: problemAdminApiResponse.data.testCases[0].input,
-                outerTestCase: problemAdminApiResponse.data.testCases[0].output
+                outerTestCase: problemAdminApiResponse.data.testCases[0].output,
+                userId : userId,
+                submissionId: submission._id
             }
         });
         return {queueResponse: response, submission};
